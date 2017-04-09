@@ -447,18 +447,27 @@ angular.module("com.2fdevs.videogular")
         };
 
         this.play = function () {
-            this.mediaElement[0].play();
-            this.setState(VG_STATES.PLAY);
+			if (this.mediaElement[0] && this.mediaElement[0].play)
+			{
+	            this.mediaElement[0].play();
+            	this.setState(VG_STATES.PLAY);
+			}
         };
 
         this.pause = function () {
-            this.mediaElement[0].pause();
-            this.setState(VG_STATES.PAUSE);
+			if (this.mediaElement[0] && this.mediaElement[0].pause)
+			{
+	            this.mediaElement[0].pause();
+            	this.setState(VG_STATES.PAUSE);
+			}
         };
 
         this.stop = function () {
             try {
-                this.mediaElement[0].pause();
+                if (this.mediaElement[0] && this.mediaElement[0].pause)
+				{
+		            this.mediaElement[0].pause();
+				}
 
                 var targetTime = isVirtualClip ? this.startTime : 0;
                 this.mediaElement[0].currentTime = targetTime;
